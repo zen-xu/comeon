@@ -680,7 +680,7 @@ reference = 'ali'
 url = "https://mirrors.aliyun.com/pypi/simple"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Backported and Experimental Type Hints for Python 3.5+"
 name = "typing-extensions"
 optional = false
@@ -721,7 +721,7 @@ reference = 'ali'
 url = "https://mirrors.aliyun.com/pypi/simple"
 
 [metadata]
-content-hash = "3149aa2226d2e8c0f9c08c84e3479c85a3ada75dad1a563c0555efb428bb4ff0"
+content-hash = "a7237eca9252156d25ebf59b325d143883049398b74672a50de53c03d6d0057a"
 python-versions = "^3.6"
 
 [metadata.files]
