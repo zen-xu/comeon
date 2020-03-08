@@ -1,5 +1,6 @@
 from typing import Any
 from typing import Callable
+from typing import Iterable
 from typing import Type
 
 import click
@@ -23,3 +24,5 @@ Color = Literal[
     "bright_yellow",
     "bright_blue",
 ]
+
+Autocompletion = Callable[[Type[click.Context], Iterable[str], str], None]
