@@ -84,7 +84,10 @@ class Command(click.Command):
         """Writes all the options into the formatter if they exist."""
         opts = []
         for param in self.get_params(ctx):
-            rv, help = param.get_help_record(ctx)
+            help_record = param.get_help_record(ctx)
+            if help_record is None:
+                continue
+            rv, help = help_record
             rv = click.style(rv, fg=self.options_color)
             help = click.style(help, fg=self.options_help_color)
             if rv is not None:
