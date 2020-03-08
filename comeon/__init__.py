@@ -1,7 +1,7 @@
 __version__ = "0.1.0"
 
-# Core classes
-from .core import Command
+# Command class
+from .command import Command
 # Decorators
 from .decorators import command
 # Param functions
