@@ -1,4 +1,5 @@
 from typing import Any
+from typing import Iterable
 from typing import Optional
 
 from comeon import params
@@ -37,7 +38,7 @@ def Argument(  # noqa: N802
 
 
 def Option(  # noqa: N802
-    *param_decls: str,
+    *param_decls: Iterable[str],
     default: Optional[Any] = None,
     show_default: bool = False,
     prompt: bool = False,

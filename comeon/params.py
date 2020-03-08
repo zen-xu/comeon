@@ -1,5 +1,6 @@
 from typing import Any
 from typing import Dict
+from typing import Iterable
 from typing import Optional
 from typing import Type
 
@@ -64,7 +65,7 @@ class Option(Param):
 
     def __init__(
         self,
-        *param_decls: str,
+        *param_decls: Iterable[str],
         default: Optional[Any] = None,
         show_default: bool = False,
         prompt: bool = False,
