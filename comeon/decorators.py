@@ -7,8 +7,7 @@ import click
 
 from click.decorators import _make_command  # type: ignore
 
-# Circular dependencies between core and decorators
-from .core import Command  # noqa
+from .core import Command
 
 
 def command(
