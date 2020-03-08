@@ -55,6 +55,7 @@ def Option(  # noqa: N802
     show_choices: bool = True,
     show_envvar: bool = False,
     autocompletion: Optional[Autocompletion] = None,
+    required: bool = False,
 ) -> Any:
     return params.Option(
         *param_decls,
@@ -74,4 +75,5 @@ def Option(  # noqa: N802
         show_choices=show_choices,
         show_envvar=show_envvar,
         autocompletion=autocompletion,
+        required=required,
     )

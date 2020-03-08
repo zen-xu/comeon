@@ -82,6 +82,7 @@ class Option(Param):
         show_choices: bool = True,
         show_envvar: bool = False,
         autocompletion: Optional[Autocompletion] = None,
+        required: bool = False,
     ):
         super().__init__(
             param_decls=param_decls,
@@ -101,4 +102,5 @@ class Option(Param):
             show_choices=show_choices,
             show_envvar=show_envvar,
             autocompletion=autocompletion,
+            required=required,
         )
