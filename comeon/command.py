@@ -128,4 +128,10 @@ def extra_position_only_param(
         else:
             kwargs[param.name] = value
 
+        if param.annotation == bool and value is None:
+            if param.default == inspect._empty:
+                kwargs[param.name] = False
+            else:
+                kwargs[param.name] = param.default
+
     return args, kwargs
