@@ -106,7 +106,7 @@ def _inject_param(
                 *[f"--{param_name}"],
                 default=param_default,
                 show_default=default is not None,
-                required=True,
+                required=(param.default != param.empty),
             )
         elif (
             param.kind == inspect._ParameterKind.VAR_POSITIONAL  # type: ignore
