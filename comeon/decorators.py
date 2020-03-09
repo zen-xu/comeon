@@ -67,7 +67,17 @@ def _inject_param(
     if isinstance(default, Param):
         param_maker = default
     else:
-        if (
+        if param.annotation == bool:
+            param_name = param.name.replace("_", "-")
+            default = False if param.default == param.empty else param.default
+            param_maker = Option(
+                *[f"--{param_name}"],
+                default=default,
+                show_default=True,
+                is_flag=True,
+                type=bool,
+            )
+        elif (
             param.kind == inspect._ParameterKind.POSITIONAL_ONLY  # type: ignore
         ):
             param_maker = Argument(param_decl=param.name, required=True)
@@ -141,6 +151,10 @@ def _inject_param(
         param_maker.update(type=click.Choice(choices))
     except AttributeError:
         pass
+
+    # update type
+    if origin_type in [int, float, str, bool]:
+        param_maker.update(type=origin_type)
 
     click_param = param_maker.make_click_param()
 
