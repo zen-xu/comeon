@@ -1,12 +1,17 @@
+import inspect
+
 from typing import Any
+from typing import Callable
 from typing import Dict
 from typing import List
 from typing import Optional
+from typing import Tuple
 
 import click
 
 from ._typing import Callback
 from ._typing import Color
+from .utils import get_typed_signature
 
 
 class Command(click.Command):
@@ -96,3 +101,31 @@ class Command(click.Command):
         if opts:
             with formatter.section("Options"):
                 formatter.write_dl(opts)
+
+    def invoke(self, ctx: click.Context):
+        click.core._maybe_show_deprecated_notice(self)
+        if self.callback is not None:
+            args, kwargs = extra_position_only_param(self.callback, ctx.params)
+            return ctx.invoke(self.callback, *args, **kwargs)
+
+
+def extra_position_only_param(
+    func: Callable[..., Any], params: Dict[str, Any]
+) -> Tuple[List[str], Dict[str, Any]]:
+    signature = get_typed_signature(func)
+    parameters = signature.parameters
+    args = []
+    kwargs = {}
+
+    for param in parameters.values():
+        value = params.get(param.name)
+        if param.kind == inspect._POSITIONAL_ONLY:
+            args.append(value)
+        elif param.kind == inspect._VAR_POSITIONAL:
+            args += list(value)
+        elif param.kind == inspect._POSITIONAL_OR_KEYWORD:
+            args.append(value)
+        else:
+            kwargs[param.name] = value
+
+    return args, kwargs
